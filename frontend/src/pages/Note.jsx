@@ -5,7 +5,7 @@ import { MdDelete } from "react-icons/md";
 
 const Note = () => {
   return (
-    <section className="text-gray-400 bg-gray-900 body-font">
+    <section className="text-gray-400 body-font">
       <div className="container px-5 py-24 mx-auto">
 
         {/* Note Head */}
