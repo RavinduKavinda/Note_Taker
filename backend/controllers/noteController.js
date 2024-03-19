@@ -72,7 +72,14 @@ const editNote = async(req,res) => {
 //get single note
 const getSingleNote = async(req,res) => {
     try{
+        const {id} = req.params;
 
+        const note = await noteModel.findById(id)
+        if(!note){
+            return res.status(404).json({"message":"Note not found"})
+        }
+        res.send(note)
+        
     }catch(err){
         console.log(err)
     }
