@@ -1,6 +1,16 @@
+const noteModel = require("../models/noteModel")
+
 //add note
 const addNote = async(req,res) => {
     try{
+        const {title,message} = req.body
+        if(!title || !message) {
+            return res.send({"message":"All fields are required"})
+        }
+
+        const note = await new noteModel({title,message})
+        await note.save()
+        res.status(201).send({"message":"Note Added"})
 
     }catch(err){
         console.log(err)
