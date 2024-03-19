@@ -51,6 +51,18 @@ const removeNote = async(req,res) => {
 //edit note
 const editNote = async(req,res) => {
     try{
+        const {id} = req.params
+        const {title, message} = req.body
+        if(!title || !message) {
+            return res.send({"message":"All feild are required"})
+        }
+
+        const note = await noteModel.findByIdAndUpdate(id,{
+            title,
+            message
+        },{new:true})
+
+        res.send({"message":"Note Updated",note})
 
     }catch(err){
         console.log(err)
