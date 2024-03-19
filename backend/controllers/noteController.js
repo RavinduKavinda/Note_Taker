@@ -20,9 +20,14 @@ const addNote = async(req,res) => {
 //get all notes
 const getAllNotes = async(req,res) => {
     try{
-
+        const notes = await noteModel.find()
+        if(notes.length===0){
+            return res.status(404).json({"message":"Notes not found"})
+        }
+        res.send(notes)
     }catch(err){
         console.log(err)
+        res.status(500).json({"message":"Error during fetching notes"})
     }
 }
 
