@@ -17,7 +17,7 @@ const getAllNotes = async(req,res) => {
 }
 
 //remove note
-const removeNotes = async(req,res) => {
+const removeNote = async(req,res) => {
     try{
 
     }catch(err){
@@ -26,7 +26,7 @@ const removeNotes = async(req,res) => {
 }
 
 //edit note
-const editNotes = async(req,res) => {
+const editNote = async(req,res) => {
     try{
 
     }catch(err){
@@ -35,7 +35,7 @@ const editNotes = async(req,res) => {
 }
 
 //get single note
-const getSingleNotes = async(req,res) => {
+const getSingleNote = async(req,res) => {
     try{
 
     }catch(err){
@@ -43,4 +43,4 @@ const getSingleNotes = async(req,res) => {
     }
 }
 
-module.exports = {addNote, getAllNotes, removeNotes, editNotes, getSingleNotes}
+module.exports = {addNote, getAllNotes, removeNote, editNote, getSingleNote}
