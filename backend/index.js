@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 8000;
 //db connect
 connectDB(process.env.DATABASE_URL);
 
+//middleware
+app.use(express.json())
+
 //route
 app.get("/",(req,res)=> {
     res.send("Hello World");
