@@ -34,9 +34,17 @@ const getAllNotes = async(req,res) => {
 //remove note
 const removeNote = async(req,res) => {
     try{
+        const {id} = req.params
+
+        const note = await noteModel.findByIdAndDelete(id)
+        if(!note){
+            return res.status(404).json({"message":"Note not found"})
+        }
+        res.status(200).json({"message":"Note Deleted"})
 
     }catch(err){
         console.log(err)
+        res.status(500).json({"message":"Note not Deleted"})
     }
 }
 

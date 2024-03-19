@@ -6,7 +6,7 @@ const router = express.Router()
 router.post("/add-note",addNote);
 router.get("/notes",getAllNotes);
 router.delete("/notes/:id",removeNote);
-router.put("/add-note",editNote);
-router.get("/add-note",getSingleNote);
+router.put("/notes/:id",editNote);
+router.get("/notes/:id",getSingleNote);
 
 module.exports = router
