@@ -17,6 +17,23 @@ const Note = () => {
     fetchNotes()
   },[])
 
+  //remove note
+  const removeNote = async(id) => {
+    try {
+      const res = await fetch(`http://localhost:8000/notes/${id}`,{
+        method:"DELETE"
+      })
+
+      if(res.ok){
+        console.log("Note Deleted")
+        const updatedNotes = notes.filter(note => note._id!==id)
+        setNotes(updatedNotes)
+      }
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <section className="text-gray-400 body-font">
       <div className="container px-5 py-24 mx-auto">
@@ -30,12 +47,11 @@ const Note = () => {
 
         {/* notes */}
         <div className="flex flex-wrap text-center px-[10%]">
-
-          {/* note card */}
-          {notes.map((note)=> {
-            return <NoteCompo key={note._id} note={note} />
-          })}
-
+          {
+            notes.map((note) => {
+              return <NoteCompo key={note._id} note ={note} removeNote={removeNote}/>
+            })
+          }
         </div>
       </div>
     </section>

@@ -2,7 +2,8 @@ import React from 'react'
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-const NoteCompo = ({note}) => {
+const NoteCompo = ({note,removeNote}) => {
+
   return (
     <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
 
@@ -19,7 +20,8 @@ const NoteCompo = ({note}) => {
             <button className="flex items-center justify-center bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-5 rounded-md ">
                 <FaEdit className="text-xl" />
             </button>
-            <button className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-md ">
+            <button className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-md"
+                onClick={() => removeNote(note._id)}>
                 <MdDelete className="text-xl" />
             </button>
             </div>
