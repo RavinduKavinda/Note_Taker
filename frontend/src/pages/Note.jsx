@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NoteCompo from '../components/NoteCompo';
+import toast from 'react-hot-toast';
 
 
 const Note = () => {
@@ -33,7 +34,7 @@ const Note = () => {
       })
 
       if(res.ok){
-        console.log("Note Deleted")
+        toast.success("Note Deleted")
         const updatedNotes = notes.filter(note => note._id!==id)
         setNotes(updatedNotes)
       }

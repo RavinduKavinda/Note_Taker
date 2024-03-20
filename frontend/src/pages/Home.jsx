@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 const Home = () => {
 
@@ -36,7 +37,7 @@ const Home = () => {
         })
 
         if(res.ok){
-            alert("Note Added")
+            toast.success("Note Added")
             setNote(initialNote)
         }
         } catch(err) {
