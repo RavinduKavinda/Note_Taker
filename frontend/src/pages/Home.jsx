@@ -23,9 +23,24 @@ const Home = () => {
     };
 
     {/* handle the form submission */}
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        console.log(note);
+
+        try{
+            const res = await fetch("http://localhost:8000/add-note",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(note)
+        })
+
+        if(res.ok){
+            alert("Note Added")
+        }
+        } catch(err) {
+            console.log(err)
+        }
     };
 
   return (
