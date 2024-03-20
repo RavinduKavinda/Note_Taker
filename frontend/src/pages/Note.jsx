@@ -1,9 +1,22 @@
-import React from 'react'
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+import React, { useEffect, useState } from 'react'
+import NoteCompo from '../components/NoteCompo';
 
 
 const Note = () => {
+
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+
+    const fetchNotes = async() => {
+      const res = await fetch("http://localhost:8000/notes");
+      const data = await res.json()
+      setNotes(data)
+    }
+
+    fetchNotes()
+  },[])
+
   return (
     <section className="text-gray-400 body-font">
       <div className="container px-5 py-24 mx-auto">
@@ -16,31 +29,10 @@ const Note = () => {
         </div>
 
         {/* notes */}
-        <div className="flex flex-wrap text-center pl-[10%] pr-[10%]">
+        <div className="flex flex-wrap text-center px-[10%]">
 
           {/* note card */}
-          <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
-
-            <div className="border-2 border-gray-800 px-4 py-6 rounded-lg">
-              <h2 className="title-font font-medium text-2xl text-white">
-                Title
-              </h2>
-              <p className="leading-relaxed">
-                This is the message.
-              </p>
-
-              {/* card buttons */}
-              <div className="flex justify-between pt-5 pl-5 pr-5">
-                <button className="flex items-center justify-center bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-5 rounded-md ">
-                    <FaEdit className="text-xl" />
-                </button>
-                <button className="flex items-center justify-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-5 rounded-md ">
-                    <MdDelete className="text-xl" />
-                </button>
-              </div>
-            </div>
-
-          </div>
+          <NoteCompo/>
 
         </div>
       </div>
