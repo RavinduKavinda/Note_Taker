@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const Home = () => {
+const EditNote = () => {
 
     {/* Initial state */}
     const initialNote = {
@@ -8,7 +9,9 @@ const Home = () => {
         message:""
     }
 
+    const {id} = useParams()
     const [note, setNote] = useState (initialNote)
+    const navigate = useNavigate()
 
     {/* handle the input changes */}
     const handleChange = (e) => {
@@ -27,8 +30,8 @@ const Home = () => {
         e.preventDefault();
 
         try{
-            const res = await fetch("http://localhost:8000/add-note",{
-            method:"POST",
+            const res = await fetch(`http://localhost:8000/notes/${id}`,{
+            method:"PUT",
             headers:{
                 "Content-Type":"application/json"
             },
@@ -36,13 +39,28 @@ const Home = () => {
         })
 
         if(res.ok){
-            alert("Note Added")
-            setNote(initialNote)
+            alert("Note Edited")
+            setTimeout(() => {
+                navigate("/notes")
+            },1000)
         }
         } catch(err) {
             console.log(err)
         }
     };
+
+    useEffect(()=>{
+        const fetchNote = async () => {
+            try {
+                const res = await fetch(`http://localhost:8000/notes/${id}`)
+                const data = await res.json()
+                setNote(data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        fetchNote()
+    },[id])
 
   return (
     <section className="body-font relative">
@@ -50,10 +68,10 @@ const Home = () => {
             {/* Home Head */}
             <div className="flex flex-col text-center w-full mb-12">
                 <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">
-                    Add A Note
+                    Edit My Note
                 </h1>
                 <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-                    Please<br/>Fill the following form to add a new note.
+                    Please<br/>Fill the following form to edit a your note.
                 </p>
             </div>
 
@@ -96,7 +114,7 @@ const Home = () => {
 
                     <div className="p-2 w-full" onSubmit={handleSubmit}>
                         <button className="flex mx-auto text-white bg-purple-500 border-0 py-2 px-8 focus:outline-none hover:bg-purple-600 rounded text-lg">
-                            Submit
+                            Save Changes
                         </button>
                     </div>
 
@@ -107,4 +125,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default EditNote

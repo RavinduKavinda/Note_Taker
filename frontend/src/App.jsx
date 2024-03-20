@@ -1,5 +1,6 @@
 import './App.css'
 import Header from './components/Header';
+import EditNote from './pages/EditNote';
 import Home from './pages/Home'
 import Note from './pages/Note'
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -11,6 +12,7 @@ export default function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/notes' element={<Note/>} />
+          <Route path='/edit-note/:id' element={<EditNote/>} />
         </Routes>
     </BrowserRouter>
   )
