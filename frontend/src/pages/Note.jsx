@@ -9,9 +9,17 @@ const Note = () => {
   useEffect(() => {
 
     const fetchNotes = async() => {
-      const res = await fetch("http://localhost:8000/notes");
-      const data = await res.json()
-      setNotes(data)
+      try {
+        const res = await fetch("http://localhost:8000/notes");
+        const data = await res.json()
+        
+        if(res.ok){
+          setNotes(data)
+        }
+
+      } catch (err) {
+        console.log(err)
+      }
     }
 
     fetchNotes()
@@ -48,7 +56,7 @@ const Note = () => {
         {/* notes */}
         <div className="flex flex-wrap text-center px-[10%]">
           {
-            notes.map((note) => {
+            notes.length === 0 ? <> Nothing To Display </> : notes.map((note) => {
               return <NoteCompo key={note._id} note ={note} removeNote={removeNote}/>
             })
           }

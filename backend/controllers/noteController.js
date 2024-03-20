@@ -24,7 +24,7 @@ const getAllNotes = async(req,res) => {
         if(notes.length===0){
             return res.status(404).json({"message":"Notes not found"})
         }
-        res.send(notes)
+        res.json(notes)
     }catch(err){
         console.log(err)
         res.status(500).json({"message":"Error during fetching notes"})
