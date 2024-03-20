@@ -32,7 +32,9 @@ const Note = () => {
         <div className="flex flex-wrap text-center px-[10%]">
 
           {/* note card */}
-          <NoteCompo/>
+          {notes.map((note)=> {
+            return <NoteCompo key={note._id} note={note} />
+          })}
 
         </div>
       </div>

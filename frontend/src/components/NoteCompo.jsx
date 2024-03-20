@@ -2,16 +2,16 @@ import React from 'react'
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-const NoteCompo = () => {
+const NoteCompo = ({note}) => {
   return (
     <div className="p-4 md:w-1/3 sm:w-1/2 w-full">
 
         <div className="border-2 border-gray-800 px-4 py-6 rounded-lg">
             <h2 className="title-font font-medium text-2xl text-white">
-            Title
+                {note.title}
             </h2>
             <p className="leading-relaxed">
-            This is the message.
+                {note.message}
             </p>
 
             {/* card buttons */}
