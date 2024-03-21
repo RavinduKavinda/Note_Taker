@@ -4,6 +4,7 @@ require('dotenv').config();
 const cors = require('cors')
 const app = express();
 const noteRoutes = require("./routes/noteRoutes")
+const path=require("path")
 
 
 //port
@@ -13,8 +14,15 @@ const PORT = process.env.PORT || 8000;
 connectDB(process.env.DATABASE_URL);
 
 //middleware
-app.use(cors())
 app.use(express.json())
+const _dirname = path.dirname("")
+const buildpath = path.join(__dirname,"../frontend/dist")
+app.use(express.static(buildpath));
+app.use(
+    cors({
+        "origin": "*",
+    }))
+
 app.use("/",noteRoutes)
 
 //route
